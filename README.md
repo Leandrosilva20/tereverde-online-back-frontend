@@ -1,29 +1,34 @@
-# Circuito Terê Verde Online
+# 🌿 Circuito Terê Verde Online
 
-Plataforma digital para promover o ecoturismo em Teresópolis, com informações sobre biodiversidade, trilhas, cachoeiras e eventos.
+Plataforma digital para promover o ecoturismo em Teresópolis, reunindo informações sobre biodiversidade, trilhas, cachoeiras e eventos nos parques da região.
 
 ## 🎯 Objetivos
-- Facilitar o acesso às informações dos parques.
+- Centralizar informações sobre os parques e reservas.
+- Facilitar o acesso de turistas e moradores às atrações naturais.
 - Promover o turismo sustentável e consciente.
-- Apoiar a comunidade local e valorizar a biodiversidade.
-
-## 👥 Atores
-- **Visitantes**: usuários que consultam trilhas, biodiversidade e eventos.
-- **Administradores**: responsáveis por atualizar o conteúdo.
+- Valorizar a biodiversidade e a cultura local.
 
 ## 🛠️ Funcionalidades
-- Mapa interativo dos parques.
-- Catálogo de biodiversidade.
-- Calendário de eventos.
-- Área administrativa segura.
+- Mapa interativo com trilhas, cachoeiras e pontos de interesse.
+- Catálogo digital de biodiversidade com fotos e descrições.
+- Calendário de eventos culturais e ambientais.
+- Informações em tempo real sobre clima e acessibilidade das trilhas.
+- Área administrativa segura para atualização de conteúdos.
 
-## 🔒 Exigências
-- Desempenho rápido.
-- Interface intuitiva.
-- Segurança de dados.
+## 🔒 Exigências Técnicas
+- Desempenho rápido e otimizado.
+- Interface intuitiva e responsiva (desktop e mobile).
+- Segurança de dados com criptografia e backups.
 - Login exclusivo para administradores.
 
 ## 🌱 Impacto Esperado
-- Turismo sustentável.
-- Valorização da comunidade local.
-- Educação ambiental.
+- Incentivo ao turismo sustentável.
+- Maior visibilidade para iniciativas locais.
+- Educação ambiental e valorização da biodiversidade.
+
+---
+
+### 🚀 Como começar
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/circuito-tere-verde.git

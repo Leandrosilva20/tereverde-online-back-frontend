@@ -44,24 +44,181 @@
     <div id="painel-admin" style="display:none">
       <h3>✅ Painel do Administrador</h3>
       <button onclick="logout()">Sair</button>
-      <h4>➕ Nova Trilha</h4>
+      <h4>Nova Trilha</h4>
       <input type="text" id="trilha-nome" placeholder="Nome da trilha" />
-      <input type="text" id="trilha-descricao" placeholder="Descrição" />
+      <input type="text" id="trilha-descricao" placeholder="Descricao" />
       <input type="text" id="trilha-dificuldade" placeholder="Dificuldade" />
       <button onclick="criarTrilha()">Salvar Trilha</button>
-      <h4>➕ Novo Evento</h4>
-      <input type="text" id="evento-titulo" placeholder="Título do evento" />
-      <input type="text" id="evento-descricao" placeholder="Descrição" />
+      <h4>Novo Evento</h4>
+      <input type="text" id="evento-titulo" placeholder="Titulo do evento" />
+      <input type="text" id="evento-descricao" placeholder="Descricao" />
       <input type="date" id="evento-inicio" />
       <input type="date" id="evento-fim" />
-      <input type="text" id="evento-horario" placeholder="Horário (ex: 09:00)" />
+      <input type="text" id="evento-horario" placeholder="Horario ex 09:00" />
       <button onclick="criarEvento()">Salvar Evento</button>
-      <h4>➕ Nova Novidade</h4>
-      <input type="text" id="novidade-titulo" placeholder="Título" />
-      <textarea id="novidade-conteudo" placeholder="Conteúdo"></textarea>
+      <h4>Nova Novidade</h4>
+      <input type="text" id="novidade-titulo" placeholder="Titulo" />
+      <textarea id="novidade-conteudo" placeholder="Conteudo"></textarea>
       <button onclick="criarNovidade()">Salvar Novidade</button>
     </div>
   </section>
 
   <section id="cadastro-admin" style="background:#fff3cd;padding:20px;margin:20px;border-radius:8px;">
-    <h3>⚙️ Criar Administ
+    <h3>Criar Administrador use so uma vez</h3>
+    <input type="text" id="cad-nome" placeholder="Nome" />
+    <input type="email" id="cad-email" placeholder="Email" />
+    <input type="password" id="cad-senha" placeholder="Senha" />
+    <button onclick="cadastrarAdmin()">Criar Admin</button>
+    <p id="msg-cadastro"></p>
+  </section>
+
+  <footer>
+    <p>Projeto Circuito Tere Verde Online 2026</p>
+  </footer>
+
+  <script>
+    var API = 'https://tereverde-online-back-frontend-production.up.railway.app';
+    var token = localStorage.getItem('token') || null;
+
+    if (token) {
+      document.getElementById('painel-admin').style.display = 'block';
+      document.getElementById('form-login').style.display = 'none';
+    }
+
+    function carregarTrilhas() {
+      fetch(API + '/api/trilhas')
+      .then(function(r){ return r.json(); })
+      .then(function(dados){
+        var c = document.getElementById('lista-trilhas');
+        if(dados.length === 0){ c.innerHTML = '<p>Nenhuma trilha cadastrada ainda.</p>'; return; }
+        c.innerHTML = dados.map(function(t){
+          return '<div class="card"><h3>'+t.nome+'</h3><p>'+(t.descricao||'')+'</p><span>'+(t.dificuldade||'')+'</span><span>'+(t.disponivel?'Disponivel':'Indisponivel')+'</span></div>';
+        }).join('');
+      })
+      .catch(function(){ document.getElementById('lista-trilhas').innerHTML = '<p>Erro ao carregar.</p>'; });
+    }
+
+    function carregarEventos() {
+      fetch(API + '/api/eventos')
+      .then(function(r){ return r.json(); })
+      .then(function(dados){
+        var c = document.getElementById('lista-eventos');
+        if(dados.length === 0){ c.innerHTML = '<p>Nenhum evento cadastrado ainda.</p>'; return; }
+        c.innerHTML = dados.map(function(e){
+          return '<div class="card"><h3>'+e.titulo+'</h3><p>'+(e.descricao||'')+'</p><p>'+(e.data_inicio||'')+' ate '+(e.data_fim||'')+' '+(e.horario||'')+'</p></div>';
+        }).join('');
+      })
+      .catch(function(){ document.getElementById('lista-eventos').innerHTML = '<p>Erro ao carregar.</p>'; });
+    }
+
+    function carregarNovidades() {
+      fetch(API + '/api/novidades')
+      .then(function(r){ return r.json(); })
+      .then(function(dados){
+        var c = document.getElementById('lista-novidades');
+        if(dados.length === 0){ c.innerHTML = '<p>Nenhuma novidade cadastrada ainda.</p>'; return; }
+        c.innerHTML = dados.map(function(n){
+          return '<div class="card"><h3>'+n.titulo+'</h3><p>'+(n.conteudo||'')+'</p></div>';
+        }).join('');
+      })
+      .catch(function(){ document.getElementById('lista-novidades').innerHTML = '<p>Erro ao carregar.</p>'; });
+    }
+
+    function fazerLogin() {
+      var email = document.getElementById('email').value;
+      var senha = document.getElementById('senha').value;
+      var msg = document.getElementById('msg-login');
+      fetch(API + '/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, senha: senha })
+      })
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,d:d}; }); })
+      .then(function(res){
+        if(res.ok){
+          token = res.d.token;
+          localStorage.setItem('token', token);
+          document.getElementById('painel-admin').style.display = 'block';
+          document.getElementById('form-login').style.display = 'none';
+          msg.textContent = '';
+        } else {
+          msg.textContent = 'Erro: ' + res.d.erro;
+        }
+      })
+      .catch(function(){ msg.textContent = 'Erro de conexao.'; });
+    }
+
+    function logout() {
+      token = null;
+      localStorage.removeItem('token');
+      document.getElementById('painel-admin').style.display = 'none';
+      document.getElementById('form-login').style.display = 'block';
+    }
+
+    function criarTrilha() {
+      fetch(API + '/api/trilhas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({
+          nome: document.getElementById('trilha-nome').value,
+          descricao: document.getElementById('trilha-descricao').value,
+          dificuldade: document.getElementById('trilha-dificuldade').value,
+          disponivel: true
+        })
+      })
+      .then(function(r){ if(r.ok){ alert('Trilha criada!'); carregarTrilhas(); } });
+    }
+
+    function criarEvento() {
+      fetch(API + '/api/eventos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({
+          titulo: document.getElementById('evento-titulo').value,
+          descricao: document.getElementById('evento-descricao').value,
+          data_inicio: document.getElementById('evento-inicio').value,
+          data_fim: document.getElementById('evento-fim').value,
+          horario: document.getElementById('evento-horario').value,
+          disponivel: true
+        })
+      })
+      .then(function(r){ if(r.ok){ alert('Evento criado!'); carregarEventos(); } });
+    }
+
+    function criarNovidade() {
+      fetch(API + '/api/novidades', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body: JSON.stringify({
+          titulo: document.getElementById('novidade-titulo').value,
+          conteudo: document.getElementById('novidade-conteudo').value
+        })
+      })
+      .then(function(r){ if(r.ok){ alert('Novidade criada!'); carregarNovidades(); } });
+    }
+
+    function cadastrarAdmin() {
+      var msg = document.getElementById('msg-cadastro');
+      fetch(API + '/api/auth/cadastrar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: document.getElementById('cad-nome').value,
+          email: document.getElementById('cad-email').value,
+          senha: document.getElementById('cad-senha').value
+        })
+      })
+      .then(function(r){ return r.json().then(function(d){ return {ok:r.ok,d:d}; }); })
+      .then(function(res){
+        msg.textContent = res.ok ? 'Admin criado! Faca login acima.' : 'Erro: ' + res.d.erro;
+      })
+      .catch(function(e){ msg.textContent = 'Erro de conexao: ' + e.message; });
+    }
+
+    carregarTrilhas();
+    carregarEventos();
+    carregarNovidades();
+  </script>
+
+</body>
+</html>

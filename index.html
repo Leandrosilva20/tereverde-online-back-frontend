@@ -18,25 +18,21 @@
     </nav>
   </header>
 
-  <!-- TRILHAS -->
   <section id="trilhas">
     <h2>🥾 Trilhas</h2>
     <div id="lista-trilhas">Carregando...</div>
   </section>
 
-  <!-- EVENTOS -->
   <section id="eventos">
     <h2>📅 Eventos</h2>
     <div id="lista-eventos">Carregando...</div>
   </section>
 
-  <!-- NOVIDADES -->
   <section id="novidades">
     <h2>📰 Novidades</h2>
     <div id="lista-novidades">Carregando...</div>
   </section>
 
-  <!-- LOGIN ADMIN -->
   <section id="login">
     <h2>🔑 Login de Administradores</h2>
     <div id="form-login">
@@ -45,18 +41,14 @@
       <button onclick="fazerLogin()">Entrar</button>
       <p id="msg-login"></p>
     </div>
-
-    <!-- PAINEL ADMIN -->
     <div id="painel-admin" style="display:none">
       <h3>✅ Painel do Administrador</h3>
       <button onclick="logout()">Sair</button>
-
       <h4>➕ Nova Trilha</h4>
       <input type="text" id="trilha-nome" placeholder="Nome da trilha" />
       <input type="text" id="trilha-descricao" placeholder="Descrição" />
-      <input type="text" id="trilha-dificuldade" placeholder="Dificuldade (fácil, médio, difícil)" />
+      <input type="text" id="trilha-dificuldade" placeholder="Dificuldade" />
       <button onclick="criarTrilha()">Salvar Trilha</button>
-
       <h4>➕ Novo Evento</h4>
       <input type="text" id="evento-titulo" placeholder="Título do evento" />
       <input type="text" id="evento-descricao" placeholder="Descrição" />
@@ -64,7 +56,6 @@
       <input type="date" id="evento-fim" />
       <input type="text" id="evento-horario" placeholder="Horário (ex: 09:00)" />
       <button onclick="criarEvento()">Salvar Evento</button>
-
       <h4>➕ Nova Novidade</h4>
       <input type="text" id="novidade-titulo" placeholder="Título" />
       <textarea id="novidade-conteudo" placeholder="Conteúdo"></textarea>
@@ -72,10 +63,5 @@
     </div>
   </section>
 
-  <!-- CADASTRO ADMIN (use só uma vez!) -->
   <section id="cadastro-admin" style="background:#fff3cd;padding:20px;margin:20px;border-radius:8px;">
-    <h3>⚙️ Criar Administrador (use só uma vez!)</h3>
-    <input type="text" id="cad-nome" placeholder="Nome" />
-    <input type="email" id="cad-email" placeholder="Email" />
-    <input type="password" id="cad-senha" placeholder="Senha" />
-    <button onclick="cadastrarAdmin()">Criar Adm
+    <h3>⚙️ Criar Administ

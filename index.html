@@ -2,95 +2,246 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Circuito Terê Verde Online</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <header>
     <h1>🌿 Circuito Terê Verde Online</h1>
     <nav>
-      <ul>
-        <li><a href="#objetivos">Objetivos</a></li>
-        <li><a href="#funcionalidades">Funcionalidades</a></li>
-        <li><a href="#exigencias">Exigências</a></li>
-        <li><a href="#atores">Casos de Uso</a></li>
-        <li><a href="#impacto">Impacto</a></li>
-        <li><a href="#login">Login</a></li>
-      </ul>
+      <a href="#trilhas">Trilhas</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#novidades">Novidades</a>
+      <a href="#login">Admin</a>
     </nav>
   </header>
 
-  <main>
-    <section id="objetivos">
-      <h2>🎯 Objetivos</h2>
-      <ul>
-        <li>Centralizar informações sobre os parques e reservas.</li>
-        <li>Facilitar o acesso de turistas e moradores às atrações naturais.</li>
-        <li>Promover o turismo sustentável e consciente.</li>
-        <li>Valorizar a biodiversidade e a cultura local.</li>
-      </ul>
-    </section>
+  <!-- TRILHAS -->
+  <section id="trilhas">
+    <h2>🥾 Trilhas</h2>
+    <div id="lista-trilhas">Carregando...</div>
+  </section>
 
-    <section id="funcionalidades">
-      <h2>🛠️ Funcionalidades</h2>
-      <ul>
-        <li>Mapa interativo com trilhas e pontos de interesse.</li>
-        <li>Catálogo digital de biodiversidade com fotos e descrições.</li>
-        <li>Calendário de eventos culturais e ambientais.</li>
-        <li>Informações em tempo real sobre clima e acessibilidade das trilhas.</li>
-        <li>Área administrativa segura para atualização de conteúdos.</li>
-      </ul>
-    </section>
+  <!-- EVENTOS -->
+  <section id="eventos">
+    <h2>📅 Eventos</h2>
+    <div id="lista-eventos">Carregando...</div>
+  </section>
 
-    <section id="exigencias">
-      <h2>🔒 Exigências</h2>
-      <ul>
-        <li>Gestão de Disponibilidade</li>
-        <li>Desempenho Rápido</li>
-        <li>Interface Intuitiva</li>
-        <li>Segurança de Dados</li>
-        <li>Login para Administradores</li>
-      </ul>
-    </section>
+  <!-- NOVIDADES -->
+  <section id="novidades">
+    <h2>📰 Novidades</h2>
+    <div id="lista-novidades">Carregando...</div>
+  </section>
 
-    <section id="atores">
-      <h2>🎭 Casos de Uso</h2>
-      <h3>Visitantes</h3>
-      <ul>
-        <li>Consultar trilhas</li>
-        <li>Ver catálogo de biodiversidade</li>
-        <li>Acessar calendário de eventos</li>
-      </ul>
-      <h3>Administradores</h3>
-      <ul>
-        <li>Atualizar informações do site</li>
-        <li>Gerenciar eventos</li>
-        <li>Garantir segurança e disponibilidade</li>
-      </ul>
-    </section>
+  <!-- LOGIN ADMIN -->
+  <section id="login">
+    <h2>🔑 Login de Administradores</h2>
+    <div id="form-login">
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="senha" placeholder="Senha" />
+      <button onclick="fazerLogin()">Entrar</button>
+      <p id="msg-login"></p>
+    </div>
 
-    <section id="impacto">
-      <h2>🌱 Impacto Esperado</h2>
-      <p>
-        Este projeto impactará diretamente a comunidade local e simplificará o acesso às informações sobre ecoturismo e biodiversidade.
-        Além disso, busca incentivar práticas de turismo sustentável e fortalecer a educação ambiental.
-      </p>
-    </section>
+    <!-- PAINEL ADMIN (aparece após login) -->
+    <div id="painel-admin" style="display:none">
+      <h3>✅ Painel do Administrador</h3>
+      <button onclick="logout()">Sair</button>
 
-    <section id="login">
-      <h2>🔑 Login de Administradores</h2>
-      <form>
-        <label for="user">Usuário:</label>
-        <input type="text" id="user" name="user">
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password">
-        <button type="submit">Entrar</button>
-      </form>
-    </section>
-  </main>
+      <h4>➕ Nova Trilha</h4>
+      <input type="text" id="trilha-nome" placeholder="Nome da trilha" />
+      <input type="text" id="trilha-descricao" placeholder="Descrição" />
+      <input type="text" id="trilha-dificuldade" placeholder="Dificuldade (fácil, médio, difícil)" />
+      <button onclick="criarTrilha()">Salvar Trilha</button>
+
+      <h4>➕ Novo Evento</h4>
+      <input type="text" id="evento-titulo" placeholder="Título do evento" />
+      <input type="text" id="evento-descricao" placeholder="Descrição" />
+      <input type="date" id="evento-inicio" />
+      <input type="date" id="evento-fim" />
+      <input type="text" id="evento-horario" placeholder="Horário (ex: 09:00)" />
+      <button onclick="criarEvento()">Salvar Evento</button>
+
+      <h4>➕ Nova Novidade</h4>
+      <input type="text" id="novidade-titulo" placeholder="Título" />
+      <textarea id="novidade-conteudo" placeholder="Conteúdo"></textarea>
+      <button onclick="criarNovidade()">Salvar Novidade</button>
+    </div>
+  </section>
 
   <footer>
     <p>Projeto Circuito Terê Verde Online © 2026</p>
   </footer>
+
+  <script>
+    const API = 'https://tereverde-online-back-frontend-production.up.railway.app';
+    let token = localStorage.getItem('token') || null;
+
+    // Verifica se já está logado
+    if (token) {
+      document.getElementById('painel-admin').style.display = 'block';
+      document.getElementById('form-login').style.display = 'none';
+    }
+
+    // Carregar trilhas
+    async function carregarTrilhas() {
+      const res = await fetch(`${API}/api/trilhas`);
+      const dados = await res.json();
+      const container = document.getElementById('lista-trilhas');
+      if (dados.length === 0) {
+        container.innerHTML = '<p>Nenhuma trilha cadastrada ainda.</p>';
+        return;
+      }
+      container.innerHTML = dados.map(t => `
+        <div class="card">
+          <h3>${t.nome}</h3>
+          <p>${t.descricao || ''}</p>
+          <span class="badge">${t.dificuldade || ''}</span>
+          <span class="status">${t.disponivel ? '✅ Disponível' : '❌ Indisponível'}</span>
+        </div>
+      `).join('');
+    }
+
+    // Carregar eventos
+    async function carregarEventos() {
+      const res = await fetch(`${API}/api/eventos`);
+      const dados = await res.json();
+      const container = document.getElementById('lista-eventos');
+      if (dados.length === 0) {
+        container.innerHTML = '<p>Nenhum evento cadastrado ainda.</p>';
+        return;
+      }
+      container.innerHTML = dados.map(e => `
+        <div class="card">
+          <h3>${e.titulo}</h3>
+          <p>${e.descricao || ''}</p>
+          <p>📅 ${e.data_inicio || ''} até ${e.data_fim || ''} — ⏰ ${e.horario || ''}</p>
+          <span class="status">${e.disponivel ? '✅ Disponível' : '❌ Indisponível'}</span>
+        </div>
+      `).join('');
+    }
+
+    // Carregar novidades
+    async function carregarNovidades() {
+      const res = await fetch(`${API}/api/novidades`);
+      const dados = await res.json();
+      const container = document.getElementById('lista-novidades');
+      if (dados.length === 0) {
+        container.innerHTML = '<p>Nenhuma novidade cadastrada ainda.</p>';
+        return;
+      }
+      container.innerHTML = dados.map(n => `
+        <div class="card">
+          <h3>${n.titulo}</h3>
+          <p>${n.conteudo || ''}</p>
+        </div>
+      `).join('');
+    }
+
+    // Login
+    async function fazerLogin() {
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+      const msg = document.getElementById('msg-login');
+
+      const res = await fetch(`${API}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, senha })
+      });
+
+      const dados = await res.json();
+
+      if (res.ok) {
+        token = dados.token;
+        localStorage.setItem('token', token);
+        document.getElementById('painel-admin').style.display = 'block';
+        document.getElementById('form-login').style.display = 'none';
+        msg.textContent = '';
+      } else {
+        msg.textContent = '❌ ' + dados.erro;
+      }
+    }
+
+    // Logout
+    function logout() {
+      token = null;
+      localStorage.removeItem('token');
+      document.getElementById('painel-admin').style.display = 'none';
+      document.getElementById('form-login').style.display = 'block';
+    }
+
+    // Criar trilha
+    async function criarTrilha() {
+      const res = await fetch(`${API}/api/trilhas`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          nome: document.getElementById('trilha-nome').value,
+          descricao: document.getElementById('trilha-descricao').value,
+          dificuldade: document.getElementById('trilha-dificuldade').value,
+          disponivel: true
+        })
+      });
+      if (res.ok) {
+        alert('Trilha criada!');
+        carregarTrilhas();
+      }
+    }
+
+    // Criar evento
+    async function criarEvento() {
+      const res = await fetch(`${API}/api/eventos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          titulo: document.getElementById('evento-titulo').value,
+          descricao: document.getElementById('evento-descricao').value,
+          data_inicio: document.getElementById('evento-inicio').value,
+          data_fim: document.getElementById('evento-fim').value,
+          horario: document.getElementById('evento-horario').value,
+          disponivel: true
+        })
+      });
+      if (res.ok) {
+        alert('Evento criado!');
+        carregarEventos();
+      }
+    }
+
+    // Criar novidade
+    async function criarNovidade() {
+      const res = await fetch(`${API}/api/novidades`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          titulo: document.getElementById('novidade-titulo').value,
+          conteudo: document.getElementById('novidade-conteudo').value
+        })
+      });
+      if (res.ok) {
+        alert('Novidade criada!');
+        carregarNovidades();
+      }
+    }
+
+    // Iniciar
+    carregarTrilhas();
+    carregarEventos();
+    carregarNovidades();
+  </script>
+
 </body>
 </html>

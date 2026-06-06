@@ -1,0 +1,53 @@
+### LOGIN DO ADMINISTRADOR
+POST https://tereverde-online-back-frontend-production.up.railway.app/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "leandrobsd20@gmail.com",
+  "senha": "sua_senha"
+}
+
+### LISTAR TRILHAS (público)
+GET https://tereverde-online-back-frontend-production.up.railway.app/api/trilhas
+
+### CRIAR TRILHA (requer token JWT)
+POST https://tereverde-online-back-frontend-production.up.railway.app/api/trilhas
+Content-Type: application/json
+Authorization: Bearer SEU_TOKEN_AQUI
+
+{
+  "nome": "Trilha da Pedra do Sino",
+  "descricao": "Trilha com vista panorâmica",
+  "dificuldade": "difícil",
+  "disponivel": true
+}
+
+### LISTAR EVENTOS (público)
+GET https://tereverde-online-back-frontend-production.up.railway.app/api/eventos
+
+### CRIAR EVENTO (requer token JWT)
+POST https://tereverde-online-back-frontend-production.up.railway.app/api/eventos
+Content-Type: application/json
+Authorization: Bearer SEU_TOKEN_AQUI
+
+{
+  "titulo": "Trilha Noturna",
+  "descricao": "Caminhada noturna guiada",
+  "data_inicio": "2026-07-10",
+  "data_fim": "2026-07-10",
+  "horario": "19:00",
+  "disponivel": true
+}
+
+### LISTAR NOVIDADES (público)
+GET https://tereverde-online-back-frontend-production.up.railway.app/api/novidades
+
+### CRIAR NOVIDADE (requer token JWT)
+POST https://tereverde-online-back-frontend-production.up.railway.app/api/novidades
+Content-Type: application/json
+Authorization: Bearer SEU_TOKEN_AQUI
+
+{
+  "titulo": "Abertura da temporada de trilhas",
+  "conteudo": "A temporada de trilhas 2026 está oficialmente aberta!"
+}

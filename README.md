@@ -1,40 +1,81 @@
-# 🌿 Circuito Terê Verde Online — MVP Back-End
+# Circuito Tere Verde Online - MVP Back-End
 
-Plataforma digital para promover o ecoturismo em Teresópolis, facilitando o acesso a informações sobre trilhas, eventos e novidades dos parques e reservas naturais.
+Plataforma digital para promover o ecoturismo em Teresopolis.
 
-## 👤 Integrante
+## Integrante
 
-- **Nome:** Leandro Silva
-- **Curso:** Desenvolvimento de Software
-- **Polo:** Teresópolis
+- Nome: Leandro Silva
+- Curso: Desenvolvimento de Software
+- Polo: Teresopolis
 
-## 🎯 Situação-Problema
+## Situacao-Problema
 
-Situação-Problema 1 — Circuito Terê Verde
+Situacao-Problema 1 - Circuito Tere Verde. Desenvolvimento de plataforma digital para acesso a informacoes sobre o Parque Nacional da Serra dos Orgaos, Parque Estadual dos Tres Picos e Parque Natural Municipal Montanhas de Teresopolis.
 
-Desenvolvimento de uma plataforma digital que permita à população acessar informações sobre o Parque Nacional da Serra dos Órgãos, o Parque Estadual dos Três Picos e o Parque Natural Municipal Montanhas de Teresópolis.
+## Descricao do MVP
 
-## 📋 Descrição do MVP
+API REST com Node.js e Express conectada ao PostgreSQL. Permite consulta publica de trilhas, eventos e novidades, login seguro com JWT e gestao de disponibilidade pelo administrador.
 
-O MVP Back-End do Circuito Terê Verde Online é uma API REST desenvolvida com Node.js e Express, conectada a um banco de dados PostgreSQL. O sistema permite:
+## Tecnologias
 
-- Consulta pública de trilhas, eventos e novidades
-- Login seguro para administradores com JWT
-- Gestão de disponibilidade e horários de eventos
-- Cadastro e atualização de trilhas e novidades
+- Node.js + Express
+- PostgreSQL
+- JWT (autenticacao)
+- bcryptjs (criptografia)
+- Railway (deploy)
 
-## 🛠️ Tecnologias Utilizadas
+## Links
 
-- Node.js + Express — Servidor e rotas da API
-- PostgreSQL — Banco de dados relacional
-- JWT — Autenticação segura
-- bcryptjs — Criptografia de senhas
-- Railway — Deploy na nuvem
+- Site: https://leandrosilva20.github.io/tereverde-online-back-frontend/
+- API: https://tereverde-online-back-frontend-production.up.railway.app/api/trilhas
+- GitHub: https://github.com/Leandrosilva20/tereverde-online-back-frontend
 
-## 🌐 Links do Projeto
+## Estrutura
 
-- Site ao vivo: https://leandrosilva20.github.io/tereverde-online-back-frontend/
-- API Back-end: https://tereverde-online-back-frontend-production.up.railway.app/api/trilhas
-- Repositório: https://github.com/Leandrosilva20/tereverde-online-back-frontend
+- src/ - codigo-fonte da API
+- src/controllers/ - logica das rotas
+- src/routes/ - definicao das rotas
+- src/middlewares/ - autenticacao JWT
+- src/models/ - conexao com banco de dados
+- test/ - exemplos de requisicoes
+- docs/ - requisitos e escopo
+- server.js - ponto de entrada
+- package.json - dependencias
 
-## 📁 Estrutura do Projeto
+## Como executar localmente
+
+1. Clone o repositorio
+2. Execute: npm install
+3. Configure o arquivo .env com DATABASE_URL e JWT_SECRET
+4. Execute: npm run dev
+
+## Requisitos Funcionais
+
+- RF01 - Visitantes consultam trilhas disponiveis
+- RF02 - Visitantes consultam eventos programados
+- RF03 - Visitantes consultam novidades dos parques
+- RF04 - Administradores fazem login com email e senha
+- RF05 - Administradores cadastram, editam e removem trilhas
+- RF06 - Administradores cadastram, editam e removem eventos
+- RF07 - Administradores cadastram, editam e removem novidades
+- RF08 - Sistema indica disponibilidade de trilhas e eventos
+
+## Requisitos Nao-Funcionais
+
+- RNF01 - API responde em menos de 2 segundos
+- RNF02 - Senhas criptografadas com bcryptjs
+- RNF03 - Autenticacao com JWT expirando em 8 horas
+- RNF04 - Sistema disponivel 24/7 na nuvem
+- RNF05 - Codigo versionado no GitHub
+- RNF06 - API segue padrao REST
+
+## Escopo - O que o MVP nao faz
+
+- Sem sistema de reservas de trilhas
+- Sem notificacoes por email ou SMS
+- Sem aplicativo mobile
+- Sem integracao com mapas ou GPS
+- Sem sistema de avaliacoes ou comentarios
+- Sem painel de metricas ou relatorios
+- Sem pagamentos ou cobracas
+- Sem cadastro de visitantes
